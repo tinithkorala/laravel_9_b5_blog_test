@@ -16,8 +16,20 @@
 
                     {{ __('You are logged in!') }}
 
+                    
+
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="col-12 pt-5">
+        <div class="card" style="width: 18rem;">
+            <a href="{{ route('users.index') }}" class="btn btn-primary">
+                <div class="card-body">
+                    <h5 class="card-title">User</h5>
+                </div>
+            </a>
         </div>
     </div>
 </div>
