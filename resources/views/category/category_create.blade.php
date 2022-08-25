@@ -9,17 +9,13 @@
                 <div class="card-header">{{ __('Category Create') }}</div>
 
                 <div class="card-body">
-
-                    @if (session('success'))
-                        <div class="alert alert-success" id="#alert">
-                            {{ session('success') }}
-                        </div>
+                    
+                   @if (session('success'))
+                        <x-alert type="success" :message="session('success')"/>
                     @endif
                     @if (session('error'))
-                        <div class="alert alert-danger" id="#alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                        <x-alert type="danger" :message="session('error')"/>
+                    @endif 
 
                     <form action="{{ route('categories.store') }}" method="POST">
                         @csrf
