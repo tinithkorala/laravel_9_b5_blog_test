@@ -23,14 +23,24 @@
         </div>
     </div>
 
-    <div class="col-12 pt-5">
+    <div class="col-md-12 pt-5 d-flex">
+
         <div class="card" style="width: 18rem;">
             <a href="{{ route('users.index') }}" class="btn btn-primary">
                 <div class="card-body">
-                    <h5 class="card-title">User</h5>
+                    <h5 class="card-title">Users</h5>
                 </div>
             </a>
         </div>
+
+        <div class="card" style="width: 18rem;">
+            <a href="{{ route('users.index') }}" class="btn btn-success">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 @endsection

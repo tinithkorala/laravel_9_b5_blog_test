@@ -19,7 +19,7 @@
 
     {{-- datatbles scripts --}}
     {{-- <link rel="stylesheet" href="{{ asset('Datatables/css/bootstrap.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('Datatables/css/dataTables.bootstrap5.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('Datatables/css/dataTables.bootstrap5.min.css') }}">
 
 
     {{-- jquery --}}
@@ -98,6 +98,8 @@
     </div>
 
     {{-- SCRIPTS --}}
+
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <script>
         $(document).ready(function () {

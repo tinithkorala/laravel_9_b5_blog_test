@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserManageController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/users', [UserManageController::class, 'index'])->name('users.index');
+
+Route::resource('categories', CategoryController::class);
