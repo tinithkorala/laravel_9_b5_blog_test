@@ -10,7 +10,7 @@
 
                 <div class="card-body">
                     
-                   @if (session('success'))
+                    @if (session('success'))
                         <x-alert type="success" :message="session('success')"/>
                     @endif
                     @if (session('error'))
@@ -26,7 +26,7 @@
                                 <div id="emailHelp" class="form-text fw-bold text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </form>
 
                 </div>

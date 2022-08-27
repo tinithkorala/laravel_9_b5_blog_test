@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
@@ -57,6 +59,12 @@ class LoginController extends Controller
                 }
 
                 if ($this->attemptLogin($request)) {
+
+                    $user_id = auth()->user()->id;
+                    $user_obj = User::find($user_id);
+                    $user_obj->is_logged_in = 1;
+                    $user_obj->save();
+
                     if ($request->hasSession()) {
                         $request->session()->put('auth.password_confirmed_at', time());
                     }
@@ -72,6 +80,29 @@ class LoginController extends Controller
 
         }
         
+    }
+
+    public function logout(Request $request)
+    {
+
+        $user_id = auth()->user()->id;
+        $user_obj = User::find($user_id);
+        $user_obj->is_logged_in = 0;
+        $user_obj->save();
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
     }
 
     /**
