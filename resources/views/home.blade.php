@@ -16,8 +16,6 @@
 
                     {{ __('You are logged in!') }}
 
-                    
-
                 </div>
             </div>
         </div>
@@ -34,7 +32,7 @@
         </div>
 
         <div class="card" style="width: 18rem;">
-            <a href="{{ route('users.index') }}" class="btn btn-success">
+            <a href="{{ route('categories.index') }}" class="btn btn-success">
                 <div class="card-body">
                     <h5 class="card-title">Categories</h5>
                 </div>
