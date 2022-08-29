@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_active')->default(true)->after('email');
             $table->boolean('is_logged_in')->default(false)->after('is_active');
-            $table->boolean('is_admin')->default(true)->after('is_logged_in');
+            $table->boolean('is_admin')->default(false)->after('is_logged_in');
         });
     }
 
