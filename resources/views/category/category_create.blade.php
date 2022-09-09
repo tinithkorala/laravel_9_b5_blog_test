@@ -5,7 +5,10 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+
+            <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
+
+            <div class="card mt-3">
                 <div class="card-header">{{ __('Category Create') }}</div>
 
                 <div class="card-body">

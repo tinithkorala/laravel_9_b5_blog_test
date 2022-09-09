@@ -46,7 +46,8 @@ class CategoryController extends Controller
         try {
 
             Category::create([
-                'c_name' => $request->input('category_name')
+                'c_name' => $request->input('category_name'),
+                'is_active' => 1
             ]);
             
             DB::commit();
@@ -68,7 +69,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
+        
     }
 
     /**
@@ -79,7 +81,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.category_edit', compact('category'));
     }
 
     /**
@@ -91,7 +93,39 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        DB::beginTransaction();
+
+        try {
+
+            $validated = $request->validate([
+                'category_name' => 'required|unique:categories,c_name,'.$category->id
+            ]);
+           
+            $checkbox = $request->input('category_status');
+
+            if((int) $checkbox == 1) {
+                $checkbox = 1;
+            }else {
+                $checkbox = 0;
+            }
+
+            $category->update([
+                'c_name' => $request->input('category_name'),
+                'is_active' => $checkbox,
+            ]);
+            
+            DB::commit();
+
+            return redirect()->route('categories.edit', $category)->with('success', 'Category has been successfully updated !');
+
+        }catch(\Exception $e) {
+
+            return redirect()->route('categories.edit', $category)->with('error', 'Category has not been successfully updated. Try again !');
+
+        }
+
+
     }
 
     /**
@@ -102,6 +136,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+
+            $category->delete();
+            
+            DB::commit();
+
+            return redirect()->route('categories.index')->with('success', 'Category has been successfully deleted !');
+
+        }catch(\Exception $e) {
+
+            return redirect()->route('categories.index')->with('error', 'Category has not been successfully deleted. Try again !');
+
+        }
     }
 }
