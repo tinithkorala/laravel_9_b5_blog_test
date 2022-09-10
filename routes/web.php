@@ -25,4 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/users', [UserManageController::class, 'index'])->name('users.index');
 
+Route::get('/categories/view/{id}', [CategoryController::class, 'view'])->name('categories.view');
 Route::resource('categories', CategoryController::class);

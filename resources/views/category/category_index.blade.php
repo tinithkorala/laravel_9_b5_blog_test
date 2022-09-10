@@ -24,8 +24,13 @@
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
+
+
                                 <tr>
-                                    <td>{{ $category->c_name }}</td>
+                                    <td>
+                                        {{ $category->c_name }}
+                                        <input type="hidden" name="category_id" id="category_id" value="{{ $category->id }}">
+                                    </td>
                                     <td style="text-align: center">
                                         <p class="fw-bold @if ($category->is_active) text-green @else text-red @endif">@if ($category->is_active) Active @else Inactive @endif</p>
                                     </td>
@@ -37,7 +42,7 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger mx-2" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
-                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#view_data">View</button>
+                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#view_data" onclick="getCategory()">View</button>
                                     </td>
                                 </tr>    
                             @endforeach
@@ -77,4 +82,30 @@
     </div>
     
 </div>
+
+<script>
+    function getCategory() {
+
+        let category_id = $('#category_id').val();
+
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/categories/view') }}/"+category_id,
+            dataType: "json",
+            success: function (response) {
+
+                $('#category_name').val(response.category.c_name);
+                let check_status = response.category.is_active;
+
+                if(check_status == 1) {
+                    $( "#category_status" ).prop( "checked", true );
+                }
+               
+            }
+        });
+
+    }
+    
+</script>
+
 @endsection

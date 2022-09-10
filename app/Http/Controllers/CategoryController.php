@@ -70,6 +70,17 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         
+        return $category;
+        
+    }
+
+    public function view($id)
+    {
+        // $category = Category::findOrFail($id);
+        $category = Category::find($id);
+        // $category = Category::all();
+        // return response()->json($category);
+        return response()->json(['category' => $category]);
         
     }
 
